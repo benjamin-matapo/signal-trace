@@ -1,8 +1,10 @@
 import json
+from copy import deepcopy
 from datetime import UTC, datetime
 from pathlib import Path
 
 import pytest
+import yaml
 
 from signaltrace.engine import load_rules, run
 from signaltrace.generator import generate_dataset
@@ -89,29 +91,25 @@ def test_run_orders_findings_by_severity_then_time() -> None:
 
 
 @pytest.mark.parametrize(
-    ("content", "message"),
+    ("mutation", "message"),
     [
-        (
-            (
-                "id: bad\ntitle: Bad\ndescription: bad\nseverity: medium\ntype: unknown\n"
-                "params: {}\nattack: {technique_id: T1, technique_name: Bad, tactic: Test}\n"
-                "recommended_actions: []\nfalse_positive_notes: none\n"
-            ),
-            "unknown rule type",
-        ),
-        (
-            (
-                "id: bad\ntitle: Bad\ndescription: bad\nseverity: medium\n"
-                "type: threshold\nparams: {event_type: login_failure}\n"
-                "attack: {technique_id: T1, technique_name: Bad, tactic: Test}\n"
-                "recommended_actions: []\nfalse_positive_notes: none\n"
-            ),
-            "missing params",
-        ),
+        ("missing_field", "missing required fields: description"),
+        ("unknown_type", "unknown rule type"),
+        ("bad_severity", "severity must be one of"),
+        ("missing_params", "missing params"),
     ],
 )
-def test_load_rules_rejects_invalid_rule_params(tmp_path, content, message) -> None:
-    (tmp_path / "bad.yaml").write_text(content, encoding="utf-8")
+def test_load_rules_rejects_invalid_rules(tmp_path, mutation, message) -> None:
+    rule = deepcopy(load_rules(RULES_DIRECTORY)[0])
+    if mutation == "missing_field":
+        del rule["description"]
+    elif mutation == "unknown_type":
+        rule["type"] = "unknown"
+    elif mutation == "bad_severity":
+        rule["severity"] = "urgent"
+    elif mutation == "missing_params":
+        del rule["params"]["count"]
+    (tmp_path / "bad.yaml").write_text(yaml.safe_dump(rule), encoding="utf-8")
 
     with pytest.raises(ValueError, match=message):
         load_rules(tmp_path)
