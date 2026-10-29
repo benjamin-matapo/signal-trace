@@ -125,7 +125,7 @@ def generate_dataset(
             "scenario_name": "brute_force",
             "user": brute_user,
             "src_ip": brute_ip,
-            "expected_rule_id": "brute_force",
+            "expected_rule_id": "ST-001",
         }
     )
 
@@ -154,7 +154,7 @@ def generate_dataset(
             "scenario_name": "password_spraying",
             "user": spray_user,
             "src_ip": spray_ip,
-            "expected_rule_id": "password_spraying",
+            "expected_rule_id": "ST-002",
         }
     )
 
@@ -182,7 +182,7 @@ def generate_dataset(
             "scenario_name": "compromise_after_failures",
             "user": compromise_user,
             "src_ip": compromise_ip,
-            "expected_rule_id": "compromise_after_failures",
+            "expected_rule_id": "ST-003",
         }
     )
 
@@ -203,7 +203,7 @@ def generate_dataset(
             "scenario_name": "impossible_travel",
             "user": travel_user,
             "src_ip": br_ip,
-            "expected_rule_id": "impossible_travel",
+            "expected_rule_id": "ST-004",
         }
     )
     mfa_user = scenario_users[4]
@@ -231,7 +231,7 @@ def generate_dataset(
             "scenario_name": "mfa_fatigue",
             "user": mfa_user,
             "src_ip": mfa_ip,
-            "expected_rule_id": "mfa_fatigue",
+            "expected_rule_id": "ST-005",
         }
     )
 

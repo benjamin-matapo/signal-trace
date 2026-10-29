@@ -1,0 +1,21 @@
+id: ST-001
+title: Repeated Login Failures
+description: Detects repeated failed logins against one account from a single source IP.
+severity: medium
+type: threshold
+params:
+  event_type: login_failure
+  count: 10
+  group_by:
+    - user
+    - src_ip
+  window_minutes: 5
+attack:
+  technique_id: T1110.001
+  technique_name: Password Guessing
+  tactic: Credential Access
+recommended_actions:
+  - Review the account and source IP activity for unauthorised access.
+  - Apply a temporary rate limit or block to the source if activity is confirmed malicious.
+  - Reset the affected user's password if compromise is suspected.
+false_positive_notes: Repeated failures may result from a mistyped password or a stale saved credential.

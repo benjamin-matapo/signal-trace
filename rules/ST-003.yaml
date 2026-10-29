@@ -1,0 +1,17 @@
+id: ST-003
+title: Successful Login After Repeated Failures
+description: Detects a successful login from an IP after repeated login failures from that IP.
+severity: critical
+type: success_after_failures
+params:
+  count: 5
+  window_minutes: 10
+attack:
+  technique_id: T1110
+  technique_name: Brute Force
+  tactic: Credential Access
+recommended_actions:
+  - Investigate the successful session and verify the user's activity out of band.
+  - Revoke active sessions and reset credentials if the login is unauthorised.
+  - Review other accounts and systems contacted by the source IP.
+false_positive_notes: A user repeatedly mistyping credentials before correcting them can produce this pattern.

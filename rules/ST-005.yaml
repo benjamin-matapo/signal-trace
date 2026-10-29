@@ -1,0 +1,17 @@
+id: ST-005
+title: MFA Fatigue
+description: Detects repeated denied MFA prompts followed by an approved prompt for one user.
+severity: high
+type: mfa_fatigue
+params:
+  count: 5
+  window_minutes: 10
+attack:
+  technique_id: T1621
+  technique_name: Multi-Factor Authentication Request Generation
+  tactic: Credential Access
+recommended_actions:
+  - Contact the user to verify whether they approved the MFA prompt.
+  - Revoke active sessions and reset credentials if approval was unauthorised.
+  - Review MFA prompt sources and consider temporarily blocking the source IP.
+false_positive_notes: A user troubleshooting an authentication issue may generate repeated prompts before approving one.

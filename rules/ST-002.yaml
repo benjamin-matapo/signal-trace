@@ -1,0 +1,17 @@
+id: ST-002
+title: Password Spraying
+description: Detects one source IP attempting to log in to many distinct accounts.
+severity: high
+type: distinct_threshold
+params:
+  count: 5
+  window_minutes: 10
+attack:
+  technique_id: T1110.003
+  technique_name: Password Spraying
+  tactic: Credential Access
+recommended_actions:
+  - Investigate the source IP and review failed login activity across targeted accounts.
+  - Block or rate-limit the source IP when the activity is not authorised.
+  - Check targeted accounts for subsequent successful logins.
+false_positive_notes: Shared testing systems or misconfigured identity integrations may authenticate many accounts.

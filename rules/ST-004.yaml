@@ -1,0 +1,16 @@
+id: ST-004
+title: Impossible Travel
+description: Detects successful logins for one user from different countries within a short interval.
+severity: high
+type: impossible_travel
+params:
+  window_minutes: 60
+attack:
+  technique_id: T1078
+  technique_name: Valid Accounts
+  tactic: Initial Access
+recommended_actions:
+  - Confirm the user's location and travel plans.
+  - Review both sessions and revoke access if either is unauthorised.
+  - Require a credential reset and stronger authentication when compromise is suspected.
+false_positive_notes: VPN egress points, proxies, or inaccurate geolocation data may show a misleading country change.
