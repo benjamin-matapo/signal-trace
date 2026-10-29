@@ -1,0 +1,32 @@
+[
+  {
+    "scenario_name": "brute_force",
+    "user": "retail.user01",
+    "src_ip": "192.0.2.164",
+    "expected_rule_id": "brute_force"
+  },
+  {
+    "scenario_name": "password_spraying",
+    "user": "retail.user06",
+    "src_ip": "198.51.100.29",
+    "expected_rule_id": "password_spraying"
+  },
+  {
+    "scenario_name": "compromise_after_failures",
+    "user": "retail.user03",
+    "src_ip": "203.0.113.7",
+    "expected_rule_id": "compromise_after_failures"
+  },
+  {
+    "scenario_name": "impossible_travel",
+    "user": "retail.user04",
+    "src_ip": "203.0.113.71",
+    "expected_rule_id": "impossible_travel"
+  },
+  {
+    "scenario_name": "mfa_fatigue",
+    "user": "retail.user05",
+    "src_ip": "198.51.100.63",
+    "expected_rule_id": "mfa_fatigue"
+  }
+]
